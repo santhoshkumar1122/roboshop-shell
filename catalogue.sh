@@ -34,7 +34,7 @@ dnf remove nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Disabling current NodeJS"
 
-dnf install nodejs:18 -y  &>> $LOGFILE
+dnf module install nodejs:18 -y  &>> $LOGFILE
 
 VALIDATE $? "Enabling NodeJS:18"
 
