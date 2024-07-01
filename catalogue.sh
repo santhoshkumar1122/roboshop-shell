@@ -29,43 +29,43 @@ else
    echo "you are a root user"
 fi
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $LOGFILE
 
-VALIDATE $? "Disabling current NodeJS" &>> $LOGFILE
+VALIDATE $? "Disabling current NodeJS" 
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $LOGFILE
 
-VALIDATE $? "Enabling NodeJS18" &>> $LOGFILE
+VALIDATE $? "Enabling NodeJS18" 
 
-dnf install nodejs -y
+dnf install nodejs -y  &>> $LOGFILE
 
-VALIDATE $? "Installing nodejs" &>> $LOGFILE
+VALIDATE $? "Installing nodejs" 
 
-useradd roboshop
+useradd roboshop  &>> $LOGFILE
 
-VALIDATE $? "Creating roboshop user" &>> $LOGFILE
+VALIDATE $? "Creating roboshop user" 
 
 mkdir /app
 
-VALIDATE $? "Creating app directory" &>> $LOGFILE
+VALIDATE $? "Creating app directory" 
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
 
-VALIDATE $? "Downloading catalogue application" &>> $LOGFILE
+VALIDATE $? "Downloading catalogue application" 
 
 cd /app
 
 unzip /tmp/catalogue.zip
 
-VALIDATE $? "unzipping catalogue" &>> $LOGFILE
+VALIDATE $? "unzipping catalogue" 
 
-npm install
+npm install &>> $LOGFILE
 
-VALIDATE $? "Installing dependencies" &>> $LOGFILE
+VALIDATE $? "Installing dependencies" 
 
 cp /home/santhosh/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
 
-VALIDATE $? "Copying catalogue service file" &>> $LOGFILE
+VALIDATE $? "Copying catalogue service file" 
 
 systemctl daemon-reload &>> $LOGFILE
 
