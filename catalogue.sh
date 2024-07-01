@@ -5,28 +5,28 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGODB_HOST=192.168.52.130
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
+MONGODB_HOST=192.168.52.130
 
-echo "script start executing at $TIMESTAMP" &>> $LOGFILE
+echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE(){
     if [ $1 -ne 0 ]
-    then
+    then 
        echo -e "$2 ... $R FAILED $N"
     else
        echo -e "$2 ... $G SUCCESS $N"
-    fi 
+    fi
 }
 
 if [ $ID -ne 0 ]
 then
-   echo -e "$R ERROR:: please run this script with root access $N"
+   echo -e "$R ERROR:: Please run this script with root access $N"
    exit 1 # we can give other than 0
 else
-   echo "you are not the root user"
+   echo "you are a root user"
 fi
 
 dnf module disable nodejs -y
